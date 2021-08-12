@@ -1,32 +1,62 @@
+<!DOCTYPE html>
+<html>
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=" utf-8" />
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-    <title>Teste - Projeto</title>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://js.arcgis.com/4.20/esri/themes/light/main.css">
-    <link rel="stylesheet" href="./css/styles.css">
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="https://js.arcgis.com/4.20/"></script>
-    <script src="./js/main.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Criando um JavaScript Tutorial</title>
+
+    <style>
+        html,
+        body,
+        #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.13/"></script>
+
+    <script>
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/widgets/Measurement"
+        ], function (Map, MapView, Measurement) {
+
+            var map = new Map({
+                basemap: "hybrid"
+            });
+
+            var view = new MapView({
+                container: "viewDiv",
+                map: map,
+                zoom: 17,
+                center: {
+                    latitude: -23.1791,
+                    longitude: -45.8872
+                }
+            });
+
+            // OPÇÃO DE MEDIÇÃO
+            var measurement = new Measurement({
+                view: view,
+                activeTool: "distance",
+            });
+
+            view.ui.add(measurement, "bottom-right")
+
+        });
+    </script>
+
 
 
 </head>
 
 <body>
-    <main>
-        <section>
-            <div class="main-area">
-                <main class="expanded-box" id="viewDiv">
-                </main>
-            </div>
-        </section>
-    </main>
-</body>
-
-
-<body>
-        <div id="listArea"></div>
-    </calcite-panel>
     <div id="viewDiv"></div>
 </body>
 
