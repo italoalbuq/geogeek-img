@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+c
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Criando um JavaScript Tutorial</title>
+
+    <style>
+        html,
+        body,
+        #viewDiv {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.13/"></script>
+
+    <script>
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/widgets/Measurement",
+            "esri/widgets/BasemapGallery",
+        ], function (Map, MapView, Measurement, BasemapGallery) {
+
+            var map = new Map({
+                basemap: "hybrid"
+            });
+
+            var view = new MapView({
+                container: "viewDiv",
+                map: map,
+                zoom: 17,
+                center: {
+                    latitude: -23.1791,
+                    longitude: -45.8872
+                }
+            });
+
+            // OPÇÃO DE MEDIÇÃO
+            var measurement = new Measurement({
+                view: view,
+                activeTool: "distance",
+            });
+
+            view.ui.add(measurement, "bottom-right")
+
+            const basemapGallery = new BasemapGallery({
+                view: view,
+                source: {
+                    portal: {
+                        url: "https://www.arcgis.com",
+                        useVectorBasemaps: true
+                    }
+                }
+            });
+
+            view.ui.add(basemapGallery, "bottom-left")
+
+        });
+    </script>
+
+</head>
+
+<body>
+    <div id="viewDiv"></div>
+</body>
+
+</html>
